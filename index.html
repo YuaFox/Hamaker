@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        
+        <meta name="msapplication-TileImage" content="launcher-icon.png">
+        <meta name="msapplication-TileColor" content="#212529">
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" href="launcher-icon.png" sizes="144x144">
+        <meta name="theme-color" content="#212529">
+        <link rel="manifest" href="manifest.json">
+        
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@iridumdev" />
+        <meta name="twitter:creator" content="@iridumdev" />
+        <meta property="og:url" content="https://iridum.github.io/Hamaker" />
+        <meta property="og:title" content="Hamaker" />
+        <meta property="og:description" content="Turn images into bead art." />
+        <meta property="og:image" content="https://iridum.github.io/Hamaker/icon-launcher.png" />
+
+        
+        <title>Hamaker</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript"> 
+            var adfly_id = 5625414; 
+            var adfly_advert = 'int'; 
+            var frequency_cap = 5; 
+            var frequency_delay = 30; 
+            var init_delay = 3; 
+            var popunder = true; 
+        </script>
+        <script src="https://cdn.adf.ly/js/entry.js"></script> 
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    </head>
+    <body class="bg-dark" style="min-height: 100vh;">
+        <nav class="navbar navbar-dark bg-darker">
+            <a class="navbar-brand" href="#">
+                <img src="icon-launcher.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Hamaker
+            </a>
+        </nav>
+        <div class="container mt-3">    
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="container">
+                    <div class="row">
+                        <div class="col col-12 col-sm-3">
+                            <div class="form-group">
+                                <label for="bead-count" class="text-white">Bead width</label>
+                                <input type="number" class="form-control" id="bead-count" value="10">
+                            </div>
+                            <ul id="color-list" class="list-group"></ul>
+                        </div>
+                        <div class="col col-12 col-sm-9">
+                            <div id="canvas-container">
+                                <canvas id="canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

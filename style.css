@@ -1,0 +1,15 @@
+.bg-darker {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+#canvas {
+    display: inline;
+    border: 2px dashed #767676;
+    border-radius: 5px;
+}
+
+#canvas-container {
+    width: 100%;
+    text-align: center;
+}
+
