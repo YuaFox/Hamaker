@@ -1,4 +1,3 @@
-var MAX_HEIGHT = 500;
 var colors = {};
 
 function closestColor(c, palette) {
@@ -91,7 +90,7 @@ var ctx = null;
 var canvas = null;
 var width = 0;
 var height = 0;
-var mBeadWidth = 10;
+var mBeadWidth = $("#bead-count").val();
 var mBeadWidthSize = 10;
 var mBeads = null;
 var mPosX = 0;
@@ -157,7 +156,6 @@ function renderBeads(x, y) {
         }
     }
     
-    console.log(colors);
     for (var k in colors){
         var index = k;
         var data = colors[k];
@@ -186,7 +184,7 @@ mPalette = new Set();
 
 function rgbStrToColor(s) {
     rgb = s.split(',');
-    return {r: parseInt(rgb[0]), g: parseInt(rgb[1]), b: parseInt(rgb[2])}
+    return {r: parseInt(rgb[0]), g: parseInt(rgb[1]), b: parseInt(rgb[2])};
 }
 function cssToRgbStr(elem, cssAttr) {
     var bg = elem.css(cssAttr);
@@ -200,11 +198,15 @@ var zoomPosState = {
     move: false,
     startMoveX: 0,
     startMoveY: 0,
-    beadsPosAtStartX: 0,
-    beadsPosAtStartX: 0    
+    beadsPosAtStartX: 0  
 };
 
 $(function() {
+    if(window.location.search === "?ad"){
+        $("#ad").addClass("d-none");
+        $("#main").removeClass("d-none");
+    }
+    
     var colors;
     
     $( "#bead-count" ).change(function() {
@@ -270,19 +272,18 @@ $(function() {
 	var y = event.clientY - rect.top;
 	var beadCoordX = x - mPosX;
 	var beadCoordY = y - mPosY;
-
+        
 	var relativeX = beadCoordX / (mBeadWidth * mBeadWidthSize);
 	var relativeY = beadCoordY / (getBeadHeight(mBeadWidth) * mBeadWidthSize);
-
-	var inc = Math.round(event.deltaY*0.1);
+        
+        var diff = 0.02;
+        
+	var inc = Math.round(event.deltaY*diff);
 	var oldWidth = (mBeadWidth * mBeadWidthSize);
 	var oldHeight = (getBeadHeight(mBeadWidth) * mBeadWidthSize);
 	mBeadWidthSize = Math.max(mBeadWidthSize - inc,1);
 	var newWidth = (mBeadWidth * mBeadWidthSize);
 	var newHeight = (getBeadHeight(mBeadWidth) * mBeadWidthSize);
-
-	var increaseX = relativeX * ((oldWidth - newWidth)/2.0)
-	var decreaseX = (1.0 - relativeX) * ((oldWidth - newWidth)/2.0)
 
 	mPosX += (relativeX) * (oldWidth - newWidth);
 	mPosY += (relativeY) * (oldHeight - newHeight);	
@@ -320,11 +321,26 @@ $(function() {
     
     ctx = canvas.getContext("2d");
 
-    var target = document.getElementById("canvas-container");
-    target.addEventListener("dragover", function(e){e.preventDefault();}, true);
-    target.addEventListener("drop", function(e){
+    var upload_element = document.getElementById("drag-area");
+    upload_element.addEventListener("dragover", function(e){
+        e.preventDefault();
+        $("body").removeClass("bg-dark");
+        $(".text-white").addClass("text-dark").removeClass("text-white");
+    }, true);
+    upload_element.addEventListener("dragleave", function(e){
+        e.preventDefault();
+        $("body").addClass("bg-dark");
+        $(".text-dark").addClass("text-white").removeClass("text-dark");
+    }, true);
+    
+    upload_element.addEventListener("drop", function(e){
 	e.preventDefault(); 
+        $("body").addClass("bg-dark");
+        $(".text-dark").addClass("text-white").removeClass("text-dark");
 	loadImage(e.dataTransfer.files[0]);
+        $("#main").addClass("d-none");
+        $("#editor").removeClass("d-none");
+        window.location.hash = '#editor';
     }, true);
     
     updateColors();

@@ -17,46 +17,61 @@
         <meta property="og:url" content="https://iridum.github.io/Hamaker" />
         <meta property="og:title" content="Hamaker" />
         <meta property="og:description" content="Turn images into bead art." />
-        <meta property="og:image" content="https://iridum.github.io/Hamaker/icon-launcher.png" />
-
+        <meta property="og:image" content="https://iridum.github.io/Hamaker/launcher-icon.png" />
         
         <title>Hamaker</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css" />
-        <script type="text/javascript"> 
-            var adfly_id = 5625414; 
-            var adfly_protocol = 'https';
-            var adfly_advert = 'int'; 
-            var frequency_cap = 5; 
-            var frequency_delay = 30; 
-            var init_delay = 3; 
-            var popunder = true; 
-        </script>
-        <script src="https://cdn.adf.ly/js/entry.js"></script> 
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </head>
     <body class="bg-dark" style="min-height: 100vh;">
         <nav class="navbar navbar-dark bg-darker">
             <a class="navbar-brand" href="#">
-                <img src="icon-launcher.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="launcher-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Hamaker
             </a>
         </nav>
-        <div class="container mt-3">    
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="container">
-                    <div class="row">
-                        <div class="col col-12 col-sm-3">
-                            <div class="form-group">
-                                <label for="bead-count" class="text-white">Bead width</label>
-                                <input type="number" class="form-control" id="bead-count" value="10">
+        
+        <div id="ad" class="container" style="max-width: 568px;">
+            <div class="center">
+                <h1 class="display-4 text-white text-center">Welcome to Hamaker</h1>
+                <p class="text-white text-center">Turn your images into bead art easily.</p>
+                <p class="text-white text-center">See an advert to support my work before access to the application.</p>
+                <a href="http://adf.ly/5625414/https://iridum.github.io/Hamaker/?app" class="btn btn-outline-light btn-block">Go <i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+        
+        <div id="main" class="container d-none"> 
+            <div id="drag-area"></div>
+            <div class="center">
+                <h1 class="display-1 text-white text-center">
+                    <i class="far fa-image"></i>
+                </h1>
+                <h1 class="d-none d-md-block display-4 text-white text-center">
+                    Drag an image here to start
+                </h1>
+            </div>
+        </div>
+        
+        <div id="editor" class="container mt-3 d-none">    
+            <div class="container">
+                <div class="row">
+                    <div class="col col-12 col-sm-3">
+                        <div class="form-group row">
+                            <label for="bead-count" class="col-sm-6 col-form-label text-white">Bead width</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="bead-count" value="50">
                             </div>
+                        </div>
+                        <hr>
+                        <p class="text-white">Color list</p>
+                        <div class="scroll-y">
                             <ul id="color-list" class="list-group"></ul>
                         </div>
-                        <div class="col col-12 col-sm-9">
-                            <div id="canvas-container">
-                                <canvas id="canvas"></canvas>
-                            </div>
+                    </div>
+                    <div class="col col-12 col-sm-9 mt-xs-2">
+                        <div id="canvas-container">
+                            <canvas id="canvas"></canvas>
                         </div>
                     </div>
                 </div>
@@ -67,5 +82,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="main.js"></script>
+        <script src="sw_installer.js"></script>
     </body>
 </html>
