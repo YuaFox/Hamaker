@@ -202,7 +202,7 @@ var zoomPosState = {
 };
 
 $(function() {
-    if(window.location.search === "?ad"){
+    if(window.location.search === "?app"){
         $("#ad").addClass("d-none");
         $("#main").removeClass("d-none");
     }
