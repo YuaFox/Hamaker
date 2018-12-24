@@ -8,7 +8,7 @@ var filesToCache = [
     'js/main.js',
     'css/extra.css',
     'img/header.png',
-    'launcher-icon-128.png'
+    'icons/launcher-icon-128.png'
 ];
 
 self.addEventListener('install', function(e) {
