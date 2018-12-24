@@ -7,7 +7,7 @@ var filesToCache = [
     'app.html',
     'js/main.js',
     'css/extra.css',
-    'img/header.jpg',
+    'img/header.png',
     'launcher-icon-128.png'
 ];
 
