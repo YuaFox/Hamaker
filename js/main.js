@@ -87,7 +87,6 @@ function toBeads(data, width, height, beadWidth) {
 
 var pixelsData = null;
 var ctx = null;
-var cache = null;
 var canvas = null;
 var width = 0;
 var height = 0;
@@ -98,6 +97,7 @@ var mPosX = 0;
 var mPosY = 0;
 var mUpdateBeads = true;
 var mDither = false;
+var mode = 0;
 
 function addBWidth(){
     mBeadWidth++;
@@ -134,6 +134,8 @@ function render(src){
 	height = img.height;
 	var pixels = tempCanvas.getContext('2d').getImageData(0, 0, img.width, img.height);
 	pixelsData = pixels.data;
+        $("#app-canvas-container").css("width", $("#app-container").width());
+        $("#app-canvas-container").css("height", $("#app-container").height());
 	renderBeads(true);
     };
     img.src = src;
@@ -152,13 +154,9 @@ function paletteToTyped(palette) {
     return r;
 }
 
-function renderBeads(nocache) {
+function renderBeads() {
+    if(width === 0) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);   
-    
-    if(nocache === false){
-        ctx.putImageData(cache, mPosX, mPosY);
-        return;
-    }
     
     colors = {};
     var palette = paletteToTyped(mPalette);
@@ -168,9 +166,6 @@ function renderBeads(nocache) {
 	var beadHeight = getBeadHeight(mBeadWidth);
 	colorReduce(mBeads.data, mBeadWidth, beadHeight, palette);
     }
-    
-    $("#app-canvas-container").css("width", $("#app-container").width());
-    $("#app-canvas-container").css("height", $("#app-container").height());
     
     canvas.width  = mBeads.width*mBeadWidthSize;
     canvas.height = mBeads.height*mBeadWidthSize;
@@ -184,7 +179,15 @@ function renderBeads(nocache) {
 	    var p = (y * mBeads.width + x)*3;
             ctx.beginPath();
             ctx.fillStyle = 'rgba(' + mBeads.data[p] + ',' + mBeads.data[p+1] + ',' + mBeads.data[p+2] + ",255)";
-            ctx.arc(xOffset + x*mBeadWidthSize,yOffset + y*mBeadWidthSize, halfBeadWidthSize,0, twoPi, true);
+            switch(mode){
+                case 0:
+                    ctx.arc(xOffset + x*mBeadWidthSize,yOffset + y*mBeadWidthSize, halfBeadWidthSize,0, twoPi, true);
+                    break;
+                case 1:
+                    ctx.rect(x*mBeadWidthSize, y*mBeadWidthSize, mBeadWidthSize, mBeadWidthSize);
+                    break;
+            }
+            
             ctx.closePath();
             ctx.fill(); 
             if(colors[mBeads.data[p]+"-"+mBeads.data[p+1]+"-"+mBeads.data[p+2]] === undefined)
@@ -198,8 +201,6 @@ function renderBeads(nocache) {
         var data = colors[k];
         $('#count-'+index).html(data);
     }
-    
-    cache = ctx.getImageData(0, 0, canvas.width , canvas.height);
 }
 
 function loadImage(src){
@@ -304,5 +305,20 @@ $(function() {
     ctx = canvas.getContext("2d");
     
     updateColors();
+    
+    $("[btn-mode]").click(function() {
+        $("[btn-mode]").removeClass("btn-primary btn-info").addClass("btn-info");
+        mode = parseInt($(this).addClass("btn-primary").removeClass("btn-info").attr("btn-mode"), 10);
+        renderBeads();
+    });
 });
+
+var toolbar = false;
+
+function toggle(){
+    toolbar = !toolbar;
+    $("#app-container").toggleClass("d-none d-flex");
+    $("#app-toolbar").toggleClass("d-none d-flex");
+    $("#app-toolbar").css("width", toolbar ? "100vw" : "20vw");
+}
 

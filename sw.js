@@ -1,13 +1,15 @@
 /* global self */
 
-var dataCacheName = 'Hamaker-v1.1';
-var cacheName = 'Hamaker-final-1.1';
+var dataCacheName = 'Hamaker-v1.2';
+var cacheName = 'Hamaker-final-1.2';
 var filesToCache = [
     '/',
     'app.html',
     'js/main.js',
     'css/extra.css',
     'img/header.png',
+    'img/header_hama.png',
+    'img/header_pixel.png',
     'icons/launcher-icon-128.png'
 ];
 

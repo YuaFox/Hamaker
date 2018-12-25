@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="----" />
+        <meta name="description" content="Turn your images into bead art easily." />
         <!--  Google META Tags -->
         <meta name="google-site-verification" content="TsVXsu7f8xly_pFtaj7epDH9_eI8brQB2oTI9ttkE-U" />
         <!--  Social META Tags -->
@@ -57,17 +57,21 @@
         </nav>
         
         <!-- Main -->
+        <div class="d-block d-sm-none" style='width: 100%; background-color: #bbb;'>
+            <a class="btn btn-info btn-block rounded-0" onclick='newImage()'>
+                New image
+            </a>
+        </div>
         <div class="d-flex flex-row flex-grow-1">
-            <div style='width: 20vw; background-color: #bbb;'>
-                <a class="btn btn-secondary btn-block rounded-0" onclick='newImage()'>
+            <div class="d-none d-sm-block" style='width: 20vw; background-color: #bbb;'>
+                <a class="btn btn-info btn-block rounded-0" onclick='newImage()'>
                     New image
                 </a>
             </div>
-            <div id='app-container' class="d-flex flex-grow-1 flex-column p-2 align-content-center justify-content-center">
+            <div id='app-container' class="d-flex flex-grow-1 flex-column align-content-center justify-content-center">
                 <h4 id='app-start' class="text-center">
                     Select an image to start
                 </h4>
-                
                 <div id='app-new' class="d-none align-content-center justify-content-center">
                     <input type='file' onchange="readURL(this);" />
                 </div>
@@ -76,10 +80,15 @@
                 </div>
                 
             </div>
-            <div class='d-flex flex-column' style='width: 20vw; background-color: #bbb;'>
+            <div id='app-toolbar' class='d-none d-sm-flex flex-column' style='width: 20vw; background-color: #bbb;'>
                 <div class='mt-3'>
                     <h5 class='text-center'>Image Settings</h5>
-                    Bead width:
+                    Render:
+                    <div class='d-flex flex-row border-top border-bottom'>
+                        <a btn-mode="0" class="btn btn-primary rounded-0 px-4 py-2 m-0">Bead art</a>
+                        <a btn-mode="1" class="btn btn-info rounded-0 px-4 py-2 m-0">Pixel art</a>
+                    </div>
+                    Width:
                     <div class='d-flex flex-row border-top border-bottom'>
                         <div id='bead-count' class='d-flex flex-grow-1 text-center' style='margin:auto;'>50</div>
                         <a class="btn btn-success rounded-0 px-4 py-2 m-0" onclick='addBWidth()'><i class="fas fa-plus"></i></a>
@@ -94,7 +103,11 @@
                 </div>
             </div>
         </div>
-        
+        <div class="d-block d-sm-none" style='width: 100%; background-color: #bbb;'>
+            <a class="btn btn-info btn-block rounded-0" onclick='toggle()'>
+                Toggle settings
+            </a>
+        </div>
         <!-- JQuery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->

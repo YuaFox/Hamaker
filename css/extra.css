@@ -6,6 +6,12 @@
 body { background-color: #eee; }
 
 .top-nav-collapse { background-color: #007bff; }
+.btn-collapse { visibility:hidden; }
+.top-nav-collapse > .btn-collapse { visibility:visible; }
+
+.text-white {
+    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+}
 
 .parallax {
     /* Create the parallax scrolling effect */
@@ -14,7 +20,9 @@ body { background-color: #eee; }
     background-repeat: no-repeat;
     background-size: cover;
 }
-.bg-1 { background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url("../img/header.png"); }
+.bg-0 { background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../img/header.png"); }
+.bg-1 { background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url("../img/header_pixel.png"); }
+.bg-2 { background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4)), url("../img/header_hama.png"); }
 
 .img-tutorial {
     display: block;
