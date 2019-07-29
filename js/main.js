@@ -1,7 +1,7 @@
 var colors = {};
 
 function closestColor(c, palette) {
-    var result = new Uint8ClampedArray(3);    
+    var result = new Uint8ClampedArray(3);
     var r = c[0];
     var g = c[1];
     var b = c[2];
@@ -18,7 +18,7 @@ function closestColor(c, palette) {
 	    result[2] = bp;
 	}
     }
-    
+
     return result;
 }
 
@@ -58,12 +58,12 @@ function toBeads(data, width, height, beadWidth) {
 		var bxImg = offset + bx * pixelsInBeadWidthBytes;
 		var accIdxRed = bx * 3;
 		var accIdxGreen = accIdxRed + 1;
-		var accIdxBlue = accIdxRed + 2;		
+		var accIdxBlue = accIdxRed + 2;
 		for (var x = 0; x < pixelsInBeadWidthBytes; x+=4) {
 		    var dataIdx = bxImg + x;
 		    acc[accIdxRed] += data[dataIdx];
 		    acc[accIdxGreen] += data[dataIdx + 1];
-		    acc[accIdxBlue] += data[dataIdx + 2];		    
+		    acc[accIdxBlue] += data[dataIdx + 2];
 		}
 	    }
 	}
@@ -71,13 +71,13 @@ function toBeads(data, width, height, beadWidth) {
 	for (var bx = 0; bx < accSize; bx+=3) {
 	    var rp = offset + bx;
 	    var bx1 = bx + 1;
-	    var bx2 = bx + 2;	    
+	    var bx2 = bx + 2;
 	    result[rp] = Math.round(acc[bx] * countInv);
 	    result[rp+1] = Math.round(acc[bx1] * countInv);
 	    result[rp+2] = Math.round(acc[bx2] * countInv);
 	    acc[bx] = 0;
 	    acc[bx1] = 0;
-	    acc[bx2] = 0;	    
+	    acc[bx2] = 0;
 	}
     }
     return {width: beadWidth,
@@ -129,7 +129,7 @@ function render(src){
 	tempCanvas = document.createElement('canvas');
 	tempCanvas.width = img.width;
 	tempCanvas.height = img.height;
-	tempCanvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);	
+	tempCanvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
 	width = img.width;
 	height = img.height;
 	var pixels = tempCanvas.getContext('2d').getImageData(0, 0, img.width, img.height);
@@ -148,7 +148,7 @@ function paletteToTyped(palette) {
 	rgb = rgbStrToColor(value);
 	r[i] = rgb.r;
 	r[i+1] = rgb.g;
-	r[i+2] = rgb.b;	
+	r[i+2] = rgb.b;
 	i+=3;
     });
     return r;
@@ -156,8 +156,8 @@ function paletteToTyped(palette) {
 
 function renderBeads() {
     if(width === 0) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);   
-    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     colors = {};
     var palette = paletteToTyped(mPalette);
     if (mUpdateBeads) {
@@ -166,14 +166,14 @@ function renderBeads() {
 	var beadHeight = getBeadHeight(mBeadWidth);
 	colorReduce(mBeads.data, mBeadWidth, beadHeight, palette);
     }
-    
+
     canvas.width  = mBeads.width*mBeadWidthSize;
     canvas.height = mBeads.height*mBeadWidthSize;
-    
+
     var halfBeadWidthSize = mBeadWidthSize/2;
     var twoPi = 2*Math.PI;
     var xOffset = mPosX + halfBeadWidthSize;
-    var yOffset = mPosY + halfBeadWidthSize;    
+    var yOffset = mPosY + halfBeadWidthSize;
     for (var y = 0; y < mBeads.height; y++) {
 	for (var x = 0; x < mBeads.width; x++) {
 	    var p = (y * mBeads.width + x)*3;
@@ -187,15 +187,15 @@ function renderBeads() {
                     ctx.rect(x*mBeadWidthSize, y*mBeadWidthSize, mBeadWidthSize, mBeadWidthSize);
                     break;
             }
-            
+
             ctx.closePath();
-            ctx.fill(); 
+            ctx.fill();
             if(colors[mBeads.data[p]+"-"+mBeads.data[p+1]+"-"+mBeads.data[p+2]] === undefined)
                 colors[mBeads.data[p]+"-"+mBeads.data[p+1]+"-"+mBeads.data[p+2]] = 0;
             colors[mBeads.data[p]+"-"+mBeads.data[p+1]+"-"+mBeads.data[p+2]]++;
         }
     }
-    
+
     for (var k in colors){
         var index = k;
         var data = colors[k];
@@ -221,7 +221,7 @@ function rgbStrToColor(s) {
 function cssToRgbStr(elem, cssAttr) {
     var bg = elem.css(cssAttr);
     var start = bg.indexOf("(");
-    var stop = bg.indexOf(")");    
+    var stop = bg.indexOf(")");
     var rgb = bg.substring(start+1,stop).replace(/\s/g, '');
     return rgb;
 }
@@ -230,7 +230,7 @@ var zoomPosState = {
     move: false,
     startMoveX: 0,
     startMoveY: 0,
-    beadsPosAtStartX: 0  
+    beadsPosAtStartX: 0
 };
 
 function newImage(){
@@ -245,15 +245,15 @@ function readURL(input){
 }
 
 $(function() {
-    
+
     var colors;
-    
+
     $( "#bead-count" ).change(function() {
         mBeadWidth = $(this).val();
         mUpdateBeads = true;
         renderBeads(true);
     });
-    
+
     function updateColors(){
         if(localStorage.getItem("colors") === null){
             localStorage.setItem("colors", JSON.stringify([
@@ -292,23 +292,23 @@ $(function() {
             ]));
         }
         colors = JSON.parse(localStorage.getItem("colors"));
-        
+
         colors.forEach(function(color) {
             mPalette.add(color.red+", "+color.green+", "+color.blue);
-            $("#color-list").append("<div class='d-flex flex-row border-top border-bottom' style='height: 50px;'><div class='d-flex px-1' style='background-color: rgb("+color.red+", "+color.green+", "+color.blue+");'></div><div id='count-"+color.red+"-"+color.green+"-"+color.blue+"' class='d-flex px-3' style='margin: auto;'>0</div><div class='d-flex flex-grow-1 px-3' style='margin: auto;'>"+color.name+"</div></div>");
+            $("#color-list").append("<div class='d-flex flex-row i-bg-light border-bottom' style='height: 50px;'><div class='d-flex px-1' style='background-color: rgb("+color.red+", "+color.green+", "+color.blue+");'></div><div id='count-"+color.red+"-"+color.green+"-"+color.blue+"' class='d-flex px-3' style='margin: auto;'>0</div><div class='d-flex flex-grow-1 px-3' style='margin: auto;'>"+color.name+"</div></div>");
         });
     }
 
-    
+
     canvas = document.getElementById("canvas");
-    
+
     ctx = canvas.getContext("2d");
-    
+
     updateColors();
-    
+
     $("[btn-mode]").click(function() {
-        $("[btn-mode]").removeClass("btn-primary btn-info").addClass("btn-info");
-        mode = parseInt($(this).addClass("btn-primary").removeClass("btn-info").attr("btn-mode"), 10);
+        $("[btn-mode]").removeClass("btn-primary btn-light").addClass("btn-light");
+        mode = parseInt($(this).addClass("btn-primary").removeClass("btn-light").attr("btn-mode"), 10);
         renderBeads();
     });
 });
@@ -321,4 +321,3 @@ function toggle(){
     $("#app-toolbar").toggleClass("d-none d-flex");
     $("#app-toolbar").css("width", toolbar ? "100vw" : "20vw");
 }
-

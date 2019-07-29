@@ -1,16 +1,37 @@
-/* 
+/*
     Created on : 22-oct-2018, 15:35:57
     Author     : iridum
 */
 
-body { background-color: #eee; }
+body { color: white; background-color: #333; }
 
-.top-nav-collapse { background-color: #007bff; }
-.btn-collapse { visibility:hidden; }
-.top-nav-collapse > .btn-collapse { visibility:visible; }
+.i-bg-dark { background-color: #222; }
+.i-bg-body { background-color: #333; }
+.i-bg-light { background-color: #444; }
+.i-bg-light-1 { background-color: #555; }
 
-.text-white {
-    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+.card { color: white; background-color: #333; }
+
+.i-bg-light-skew-p {
+    background: linear-gradient(
+                 2deg,
+                 transparent 10%,
+                 #444 10%,
+                 #444 90%,
+                 transparent 90%);
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+}
+
+.i-bg-light-skew-n {
+    background: linear-gradient(
+                 -2deg,
+                 transparent 10%,
+                 #444 10%,
+                 #444 90%,
+                 transparent 90%);
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
 }
 
 .parallax {
@@ -20,14 +41,6 @@ body { background-color: #eee; }
     background-repeat: no-repeat;
     background-size: cover;
 }
-.bg-0 { background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../img/header.png"); }
-.bg-1 { background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1)), url("../img/header_pixel.png"); }
-.bg-2 { background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4)), url("../img/header_hama.png"); }
-
-.img-tutorial {
-    display: block;
-    max-width: 100%;
-    max-height: 300px;
-    width: auto;
-    height: auto;
-}
+.i-bg-i-100-r { background-size: contain; background-repeat: no-repeat; background-position: right; }
+.i-bg-i-100-c { background-size: contain; background-repeat: no-repeat; background-position: center; }
+.i-bg-i-example { background-image: url("../img/example.png"); }
